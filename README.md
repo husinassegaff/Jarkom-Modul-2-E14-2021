@@ -122,9 +122,9 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 6. Setelah itu, masukkan `echo nameserver 192.168.122.1 > /etc/resolv.conf` pada semua console node
 7. Kemudian, dilakukan test ping google.com pada dua client tersebut <br/>
    a. Alabasta
-   ![ping_google_alabasta](img/test_ping_google_alabasta.png)
+   ![ping_google_alabasta](img/no1_test_ping_google_alabasta.png)
    b. Loguetown
-   ![ping_google_loguetown](img/test_ping_google_loguetown.png)
+   ![ping_google_loguetown](img/no1_test_ping_google_loguetown.png)
 
 ## Soal 2
 
@@ -187,3 +187,196 @@ Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yy
 
 1. Edit file **/etc/bind/kaizoku/franky.e14.com**, lalu tambahkan subdomain untuk franky.e14.com yang mengarah ke IP Skypie (10.36.2.4)
    ![enies_lobby_franky.e14.com](img/no3_enies_lobby_franky.e14.com.png)
+2. Restart service bind
+   ```
+   service bind9 restart
+   ```
+3. Lalu, dilakukan `ping super.franky.e14.com` dan `ping www.super.franky.e14.com` pada client Alabasta dan Loguetown <br/>
+   a. Alabasta
+   ![no3_test_ping_alabasta](img/no3_test_ping_alabasta.png)
+   b. Loguetown
+   ![no3_test_ping_loguetown](img/no3_test_ping_loguetown.png)
+
+## Soal 4
+
+Buat juga reverse domain untuk domain utama
+
+**Pembahasan:**
+
+1. Membuka file **named.conf.local** dengan perintah
+   ```
+   nano /etc/bind/named.conf.local
+   ```
+2. Lalu tambahkan konfigurasi berikut ke dalam file **named.conf.local**. Tambahkan reverse dari 3 byte awal dari IP yang ingin dilakukan Reverse DNS.
+   ```
+   zone "2.36.10.in-addr.arpa" {
+      type master;
+      file "/etc/bind/kaizoku/2.36.10.in-addr.arpa";
+   };
+   ```
+   ![enies_lobby_named.conf.local](img/no4_enies_lobby_named.conf.local.png)
+3. Copykan file db.local pada path /etc/bind ke dalam folder kaizoku yang baru saja dibuat dan ubah namanya menjadi **2.36.10.in-addr.arpa**
+   ```
+   cp /etc/bind/db.local /etc/bind/kaizoku/2.36.10.in-addr.arpa
+   ```
+4. Edit file **2.36.10.in-addr.arpa** menjadi seperti gambar di bawah ini
+   ![enies_lobby_2.36.10.in-addr.arpa](img/no4_enies_lobby_2.36.10.in-addr.arpa.png)
+5. Kemudian restart bind9
+   ```
+   service bind9 restart
+   ```
+6. Untuk mengecek apakah konfigurasi sudah benar atau belum, lakukan perintah berikut pada client Alabasta dan Loguetown
+   - Ubah nameserver pada file **/etc/resolv.conf** ke nameserver Foosha (192.168.122.1)
+   ```
+   nameserver 192.168.122.1
+   #nameserver 10.36.2.2
+   ```
+   - Install package dnsutilts
+   ```
+   apt-get update
+   apt-get install dnsutils
+   ```
+   - Kembalikan nameserver pada file **/etc/resolv.conf** ke nameserver EniesLobby
+   ```
+   nameserver 192.168.122.1
+   #nameserver 10.36.2.2
+   ```
+   - Jalankan perintah berikut untuk memastikan konfigurasi sudah benar atau belum. IP yang digunakan adalah IP EniesLobby
+   ```
+   host -t PTR 10.36.2.2
+   ```
+7. Hasil dari konfigurasi pada Alabasta dan Loguetown
+   a. Alabasta
+   ![no4_test_host_alabasta](img/no4_alabasta_2.36.10.in-addr.arpa.png)
+   b. Loguetown
+   ![no4_test_host_loguetown](img/no4_loguetown_2.36.10.in-addr.arpa.png)
+
+## Soal 5
+
+Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama
+
+**Pembahasan:**
+
+1. Edit file **/etc/bind/named.conf.local** pada EniesLobby dengan
+   ```
+   zone "franky.e14.com" {
+      type master;
+      notify yes;
+      also-notify { 10.36.2.3; }; // Masukan IP Water7 tanpa tanda petik
+      allow-transfer { 10.36.2.3; }; // Masukan IP Water7 tanpa tanda petik
+      file "/etc/bind/kaizoku/franky.e14.com";
+   };
+   ```
+   ![enies_lobby_named.conf.local](img/no5_enies_lobby_named.conf.local.png)
+2. Lakukan restart bind9
+   ```
+   service bind9 restart
+   ```
+3. Membuka console Water7. Kemudian lakukan update dan install bind9
+   ```
+   apt-get update
+   apt-get install bind9 -y
+   ```
+4. Kemudian buka file **/etc/bind/named.conf.local** pada Water7 dan tambahkan syntax berikut,
+   ```
+   zone "franky.e14.com" {
+      type slave;
+      masters { 10.36.2.2; }; // Masukan IP EniesLobby tanpa tanda petik
+      file "/var/lib/bind/franky.e14.com";
+   };
+   ```
+   ![water7_named.conf.local](img/no5_water7_named.conf.local.png)
+5. Lakukan restart bind9
+   ```
+   service bind9 restart
+   ```
+6. Untuk melakukan testing dapat dilakukan dengan
+   - Matikan service bind9 pada EniesLobby
+   ```
+   service bind9 stop
+   ```
+   - Buka console Alabasta dan Loguetown. kemudian tambahkan nameserver Water7 pada file **/etc/resolv.conf**
+   ```
+   nameserver 10.36.2.2
+   nameserver 10.36.2.3
+   ```
+   - Lakukan `ping franky.e14.com` pada Alabasta dan Loguetown
+
+## Soal 6
+
+Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
+
+**Pembahasan:**
+
+1. Pada EniesLobby, edit file **/etc/bind/kaizoku/franky.e14.com** dan ubah menjadi seperti di bawah ini sesuai dengan pembagian IP EniesLobby kelompok masing-masing.
+   ```
+   nano /etc/bind/kaizoku/franky.e14.com
+   ```
+   ![enies_lobby_franky.e14.com](img/no6_enies_lobby_franky.e14.com.png)
+2. Kemudian edit file **/etc/bind/named.conf.options** pada EniesLobby.
+   ```
+   nano /etc/bind/named.conf.options
+   ```
+3. Setelah itu, comment `dnssec-validation auto;` dan tambahkan baris berikut pada **/etc/bind/named.conf.options**
+   ```
+   allow-query{any;};
+   ```
+4. Kemudian edit file **/etc/bind/named.conf.local** menjadi seperti gambar di bawah:
+   ![enies_lobby_named.conf.local](img/no6_enies_lobby_named.conf.local.png)
+5. Lalu, restart bind9
+   ```
+   service bind9 restart
+   ```
+6. Pada console water7, edit file **/etc/bind/named.conf.options**
+7. Kemudian comment `dnssec-validation auto;` dan tambahkan baris berikut pada **/etc/bind/named.conf.options**
+   ```
+   allow-query{any;};
+   ```
+8. Edit file **/etc/bind/named.conf.local** pada console Water7 menjadi seperti gambar di bawah
+   ![water7_named.conf.local](img/no6_water7_named.conf.local.png)
+9. Kemudian buat direktori dengan nama **sunnygo** pada Water7
+   ```
+   mkdir /etc/bind/sunnygo
+   ```
+10. Copy db.local ke direktori **sunnygo** dan edit namanya menjadi `mecha.franky.e14.com`
+    ```
+    cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.e14.com
+    ```
+11. Kemudian edit file mecha.franky.e14.com menjadi seperti dibawah ini
+    ```
+    nano /etc/bind/sunnygo/mecha.franky.e14.com
+    ```
+    ![water7_mecha.franky.e14.com](img/no6_water7_mecha.franky.e14.com.png)
+12. Restart bind9 di Water7
+
+```
+service bind9 restart
+```
+
+13. Lalu, dilakukan testing `ping mecha.franky.e14.com` dan `ping www.mecha.franky.e14.com` pada Alabasta dan Loguetown <br/>
+    a. Alabasta
+    ![no6_test_ping_alabasta](img/no6_test_ping_alabasta.png)
+    b. Loguetown
+    ![no6_test_ping_loguetown](img/no6_test_ping_loguetown.png)
+
+## Soal 7
+
+Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
+
+**Pembahasan:**
+
+1. Edit file **/etc/bind/sunnygo/mecha.franky.e14.com**, lalu tambahkan subdomain untuk mecha.franky.e14.com yang mengarah ke IP Skypie.
+   ```
+   nano /etc/bind/sunnygo/mecha.franky.e14.com
+   ```
+   ![water7_mecha.franky.e14.com](img/no7_water7_mecha.franky.e14.com.png)
+2. Restart service bind
+   ```
+   service bind9 restart
+   ```
+3. Lakukan testing `ping general.mecha.franky.e14.com` dan `wwww.general.mecha.franky.e14.com` pada Alabasta dan Loguetown <br/>
+   a. Alabasta
+   ![no7_test_ping_alabasta](img/no7_test_ping_alabasta.png)
+
+   b. Loguetown
+   ![no7_test_ping_loguetown](img/no7_test_ping_loguetown.png)
