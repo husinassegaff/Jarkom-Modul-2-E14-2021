@@ -12,7 +12,6 @@
 
 A. Jawaban
 
-- [Prefix IP](#prefix-ip)
 - [Soal 1](#soal-1)
 - [Soal 2](#soal-2)
 - [Soal 3](#soal-3)
@@ -186,7 +185,7 @@ Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yy
 
 **Pembahasan:**
 
-1. Buka console EniesLobby, kemudian edit file **/etc/bind/kaizoku/franky.e14.com**, lalu tambahkan subdomain untuk franky.e14.com yang mengarah ke IP Skypie (10.36.2.4)
+1. Edit file **/etc/bind/kaizoku/franky.e14.com**, lalu tambahkan subdomain untuk franky.e14.com yang mengarah ke IP Skypie (10.36.2.4)
    ![enies_lobby_franky.e14.com](img/no3_enies_lobby_franky.e14.com.png)
 2. Restart service bind
    ```
@@ -204,7 +203,7 @@ Buat juga reverse domain untuk domain utama
 
 **Pembahasan:**
 
-1. Membuka file **named.conf.local** pada console EniesLobby dengan perintah
+1. Membuka file **named.conf.local** dengan perintah
    ```
    nano /etc/bind/named.conf.local
    ```
@@ -366,7 +365,7 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
 
 **Pembahasan:**
 
-1. Buka console Water7, kemudian edit file **/etc/bind/sunnygo/mecha.franky.e14.com**, lalu tambahkan subdomain untuk mecha.franky.e14.com yang mengarah ke IP Skypie.
+1. Edit file **/etc/bind/sunnygo/mecha.franky.e14.com**, lalu tambahkan subdomain untuk mecha.franky.e14.com yang mengarah ke IP Skypie.
    ```
    nano /etc/bind/sunnygo/mecha.franky.e14.com
    ```
@@ -387,6 +386,48 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
 Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
 
 **Pembahasan:**
+1. Install Lynx pada Loguetown dan Alabasta untuk testing web server.
+   ```
+   apt-get update
+   apt-get install lynx
+   ```
+2. Install Apache2 pada EniesLobby untuk membuat web server.
+   ```
+   apt-get update
+   apt-get install apache2 -y
+   apt-get install libapache2-mod-php7.0 -y
+   ```
+3. Copy file **/etc/apache2/sites-available/000-default.conf** untuk file konfigurasi website franky.e14.com.
+   ```
+   cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.e14.com.conf
+   ```
+4. Edit file **/etc/apache2/sites-available/franky.e14.com.conf**, lalu ganti **DocumentRoot** menjadi **/var/www/franky.e14.com**.
+   ![alt_text](img/8.4.png)
+5. Aktifkan konfigurasi **franky.e14.com**.
+   ```
+   a2ensite franky.e14.com.conf
+   ```
+7. Buat directory baru pada **/var/www/** dengan nama **franky.e14.com**.
+   ```
+   mkdir /var/www/franky.e14.com
+   ```
+6. Buat file **index.php** dan **home.html**. Kemudian, masukkan konfigurasi sesuai soal.
+   ```
+   vim /var/www/franky.e14.com/index.php
+   vim /var/www/franky.e14.com/home.html
+   ```
+   ![alt_text](img/8.6.png)
+7. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta dan Loguetown.
+   a. Alabasta
+   ![alt_text](img/8.8.a.png)
+
+   b. Loguetown
+   ![alt_text](img/8.8.b.png)
+
 
 ## Soal 9
 
