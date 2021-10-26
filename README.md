@@ -386,6 +386,7 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
 Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
 
 **Pembahasan:**
+
 1. Install Lynx pada Loguetown dan Alabasta untuk testing web server.
    ```
    apt-get update
@@ -416,10 +417,13 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
    mkdir /var/www/franky.e14.com
    ```
-6. Buat file **index.php** dan **home.html**. Kemudian, masukkan konfigurasi sesuai soal.
+6. Download asset yang telah disediakan soal. Kemudian extract **franky.zip**.
    ```
-   vim /var/www/franky.e14.com/index.php
-   vim /var/www/franky.e14.com/home.html
+   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/franky.zip
+   apt-get install unzip
+   unzip franky.zip
+   mv franky/home.html /var/www/franky.e14.com/home.html
+   mv franky/index.php /var/www/franky.e14.com/index.php
    ```
    ![alt_text](img/8.6.png)
 7. Lakukan restrart apache untuk menerapkan konfigurasi.
@@ -427,7 +431,7 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    service apache2 restart
    ```
 8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta atau Loguetown. <br>
-   ![alt_text](img/8.8.a.png)
+   ![alt_text](img/8.8.png)
 
 
 ## Soal 9
@@ -435,6 +439,7 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
 Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.
 
 **Pembahasan:**
+
 1. Edit file **/etc/apache2/sites-available/franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
    ```
    Alias "/home" "/var/www/franky.e14.com/index.php/home"
@@ -445,7 +450,7 @@ Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home d
    service apache2 restart
    ```
 3. Lakukan testing `lynx franky.e14.com/home` dan `lynx wwww.franky.e14.com/home` pada Loguetown. <br>
-   ![alt_text](img/8.8.b.png)
+   ![alt_text](img/9.3.png)
 
 
 ## Soal 10
@@ -454,17 +459,82 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
 
 **Pembahasan:**
 
+1. Install Apache2 pada Skypie untuk membuat web server.
+   ```
+   apt-get update
+   apt-get install apache2 -y
+   apt-get install libapache2-mod-php7.0 -y
+   ```
+2. Copy file **/etc/apache2/sites-available/000-default.conf** untuk file konfigurasi website super.franky.e14.com.
+   ```
+   cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/super.franky.e14.com.conf
+   ```
+3. Edit file **/etc/apache2/sites-available/franky.e14.com.conf** dan tambahkan konfigurasi berikut.
+   ```
+   ServerName super.franky.e14.com
+   ServerAlias www.super.franky.e14.com
+   DocumentRoot /var/www/super.franky.e14.com
+   ```
+   ![alt_text](img/10.4.png)
+5. Aktifkan konfigurasi **super.franky.e14.com**.
+   ```
+   a2ensite super.franky.e14.com.conf
+   ```
+7. Buat directory baru pada **/var/www/** dengan nama **super.franky.e14.com**.
+   ```
+   mkdir /var/www/super.franky.e14.com
+   ```
+6. Download asset yang telah disediakan soal. Kemudian extract **super.franky.zip**.
+   ```
+   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/super.franky.zip
+   unzip super.franky.zip
+   mv super.franky/error /var/www/super.franky.e14.com/error
+   mv super.franky/public /var/www/super.franky.e14.com/public
+   ```
+   ![alt_text](img/10.6.png)
+7. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+8. Lakukan testing `lynx super.franky.e14.com` dan `lynx wwww.super.franky.e14.com` pada Alabasta atau Loguetown. <br>
+   ![alt_text](img/10.8.png)
+
 ## Soal 11
 
 Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
 
 **Pembahasan:**
 
+1. Edit file **/etc/apache2/sites-available/super.franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
+   ```
+   <Directory /var/www/super.franky.e14.com/public>
+      Options +Indexes
+   </Directory>
+   ```
+   ![alt_text](img/11.1.png)
+2. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+3. Lakukan testing `lynx super.franky.e14.com/public` dan `lynx super.wwww.franky.e14.com/public` pada Loguetown. <br>
+   ![alt_text](img/11.3.png)
+
 ## Soal 12
 
 Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache.
 
 **Pembahasan:**
+1. Edit file **/etc/apache2/sites-available/super.franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
+   ```
+   ErrorDocument 404 /error/404.html
+   ```
+   ![alt_text](img/12.1.png)
+2. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+3. Lakukan testing `lynx super.franky.e14.com/404` dan `lynx super.wwww.franky.e14.com/404` pada Loguetown. <br>
+   ![alt_text](img/12.3.png)
 
 ## Soal 13
 
