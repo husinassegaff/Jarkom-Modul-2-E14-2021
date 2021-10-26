@@ -401,7 +401,7 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
    cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.e14.com.conf
    ```
-4. Edit file **/etc/apache2/sites-available/franky.e14.com.conf**, lalu ganti **DocumentRoot** menjadi **/var/www/franky.e14.com**.
+4. Edit file **/etc/apache2/sites-available/franky.e14.com.conf**, lalu ganti **DocumentRoot** menjadi **/var/www/franky.e14.com**. <br>
    ![alt_text](img/8.4.png)
 5. Aktifkan konfigurasi **franky.e14.com**.
    ```
@@ -421,11 +421,11 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
    service apache2 restart
    ```
-8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta dan Loguetown.
-   a. Alabasta
+8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta dan Loguetown. <br>
+   a. Alabasta <br>
    ![alt_text](img/8.8.a.png)
 
-   b. Loguetown
+   b. Loguetown <br>
    ![alt_text](img/8.8.b.png)
 
 
