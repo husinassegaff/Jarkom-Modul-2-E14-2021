@@ -413,17 +413,12 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
    a2ensite franky.e14.com.conf
    ```
-7. Buat directory baru pada **/var/www/** dengan nama **franky.e14.com**.
-   ```
-   mkdir /var/www/franky.e14.com
-   ```
 6. Download asset yang telah disediakan soal. Kemudian extract **franky.zip**.
    ```
    wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/franky.zip
    apt-get install unzip
    unzip franky.zip
-   mv franky/home.html /var/www/franky.e14.com/home.html
-   mv franky/index.php /var/www/franky.e14.com/index.php
+   mv franky /var/www/franky.e14.com
    ```
    ![alt_text](img/8.6.png)
 7. Lakukan restrart apache untuk menerapkan konfigurasi.
@@ -469,7 +464,7 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
    ```
    cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/super.franky.e14.com.conf
    ```
-3. Edit file **/etc/apache2/sites-available/franky.e14.com.conf** dan tambahkan konfigurasi berikut.
+3. Edit file **/etc/apache2/sites-available/super.franky.e14.com.conf** dan tambahkan konfigurasi berikut.
    ```
    ServerName super.franky.e14.com
    ServerAlias www.super.franky.e14.com
@@ -480,16 +475,11 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
    ```
    a2ensite super.franky.e14.com.conf
    ```
-7. Buat directory baru pada **/var/www/** dengan nama **super.franky.e14.com**.
-   ```
-   mkdir /var/www/super.franky.e14.com
-   ```
 6. Download asset yang telah disediakan soal. Kemudian extract **super.franky.zip**.
    ```
    wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/super.franky.zip
    unzip super.franky.zip
-   mv super.franky/error /var/www/super.franky.e14.com/error
-   mv super.franky/public /var/www/super.franky.e14.com/public
+   mv super.franky /var/www/super.franky.e14.com
    ```
    ![alt_text](img/10.6.png)
 7. Lakukan restrart apache untuk menerapkan konfigurasi.
@@ -563,6 +553,42 @@ Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host i
 Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500.
 
 **Pembahasan:**
+
+1. Pada Skypie, copy file **/etc/apache2/sites-available/000-default.conf** untuk file konfigurasi website general.mecha.franky.e14.com.
+   ```
+   cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.e14.com.conf
+   ```
+2. Edit file **/etc/apache2/ports.conf** dan tambahkan port 15000 dan port 15500.
+   ```
+   Listen 15000
+   Listen 15500
+   ```
+4. Edit file **/etc/apache2/sites-available/general.mecha.franky.e14.com.conf** dan tambahkan konfigurasi berikut.
+   ```
+   <VirtualHost *:15000 *:15500>
+   ...
+   ServerName general.mecha.franky.e14.com
+   ServerAlias www.general.mecha.franky.e14.com
+   DocumentRoot /var/www/general.mecha.franky.e14.com
+   ```
+   ![alt_text](img/14.4.png)
+5. Aktifkan konfigurasi **general.mecha.franky.e14.com**.
+   ```
+   a2ensite general.mecha.franky.e14.com.conf
+   ```
+6. Download asset yang telah disediakan soal. Kemudian extract **general.mecha.franky.zip**.
+   ```
+   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/general.mecha.franky.zip
+   unzip general.mecha.franky.zip
+   mv general.mecha.franky /var/www/general.mecha.franky.e14.com/
+   ```
+   ![alt_text](img/14.6.png)
+7. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+8. Lakukan testing `lynx general.mecha.franky.e14.com` dan `lynx wwww.general.mecha.franky.e14.com` pada Alabasta atau Loguetown. <br>
+   ![alt_text](img/14.8.png)
 
 ## Soal 15
 
