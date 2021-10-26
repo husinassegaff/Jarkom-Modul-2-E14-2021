@@ -524,6 +524,7 @@ Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory li
 Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache.
 
 **Pembahasan:**
+
 1. Edit file **/etc/apache2/sites-available/super.franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
    ```
    ErrorDocument 404 /error/404.html
@@ -541,6 +542,21 @@ Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error un
 Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js.
 
 **Pembahasan:**
+
+1. Edit file **/etc/apache2/sites-available/super.franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
+   ```
+   <Directory /var/www/super.franky.e14.com/public/js>
+      Options +Indexes
+   </Directory>
+   Alias "/js" "/var/www/super.franky.e14.com/public/js"
+   ```
+   ![alt_text](img/13.1.png)
+2. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+3. Lakukan testing `lynx super.franky.e14.com/js` dan `lynx super.wwww.franky.e14.com/js` pada Loguetown. <br>
+   ![alt_text](img/12.3.png)
 
 ## Soal 14
 
