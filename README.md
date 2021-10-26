@@ -395,8 +395,10 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
 2. Install Apache2 pada EniesLobby untuk membuat web server.
    ```
    apt-get update
+   apt-get install wget
    apt-get install apache2 -y
    apt-get install libapache2-mod-php7.0 -y
+   apt-get install unzip
    ```
 3. Copy file **/etc/apache2/sites-available/000-default.conf** untuk file konfigurasi website franky.e14.com.
    ```
@@ -415,8 +417,7 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
 6. Download asset yang telah disediakan soal. Kemudian extract **franky.zip**.
    ```
-   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/franky.zip
-   apt-get install unzip
+   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/franky.zip
    unzip franky.zip
    mv franky /var/www/franky.e14.com
    ```
@@ -477,7 +478,7 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
    ```
 6. Download asset yang telah disediakan soal. Kemudian extract **super.franky.zip**.
    ```
-   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/super.franky.zip
+   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip
    unzip super.franky.zip
    mv super.franky /var/www/super.franky.e14.com
    ```
@@ -578,7 +579,7 @@ Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses 
    ```
 6. Download asset yang telah disediakan soal. Kemudian extract **general.mecha.franky.zip**.
    ```
-   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/blob/main/general.mecha.franky.zip
+   wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/general.mecha.franky.zip
    unzip general.mecha.franky.zip
    mv general.mecha.franky /var/www/general.mecha.franky.e14.com/
    ```
