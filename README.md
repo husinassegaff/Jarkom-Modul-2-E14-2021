@@ -421,7 +421,6 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    unzip franky.zip
    mv franky /var/www/franky.e14.com
    ```
-   ![alt_text](img/8.6.png)
 7. Lakukan restrart apache untuk menerapkan konfigurasi.
    ```
    service apache2 restart
@@ -458,8 +457,10 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
 1. Install Apache2 pada Skypie untuk membuat web server.
    ```
    apt-get update
+   apt-get install wget -y
    apt-get install apache2 -y
    apt-get install libapache2-mod-php7.0 -y
+   apt-get install unzip -y
    ```
 2. Copy file **/etc/apache2/sites-available/000-default.conf** untuk file konfigurasi website super.franky.e14.com.
    ```
@@ -482,7 +483,6 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
    unzip super.franky.zip
    mv super.franky /var/www/super.franky.e14.com
    ```
-   ![alt_text](img/10.6.png)
 7. Lakukan restrart apache untuk menerapkan konfigurasi.
    ```
    service apache2 restart
