@@ -587,7 +587,7 @@ Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses 
    ```
    service apache2 restart
    ```
-8. Lakukan testing `lynx general.mecha.franky.e14.com` dan `lynx wwww.general.mecha.franky.e14.com` pada Alabasta atau Loguetown. <br>
+8. Lakukan testing `lynx general.mecha.franky.e14.com:15000` dan `lynx general.mecha.franky.e14.com:15500` pada Alabasta atau Loguetown. <br>
    ![alt_text](img/14.8.png)
 
 ## Soal 15
@@ -595,3 +595,24 @@ Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses 
 Dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy.
 
 **Pembahasan:**
+
+1. Edit file **/etc/apache2/sites-available/general.mecha.franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
+   ```
+   <Directory /var/www/general.mecha.franky.e14.com>
+      AuthType Basic
+      AuthName "Private"
+      AuthUserFile /etc/apache2/.htpasswd
+      Require valid-user
+   </Directory>
+   ```
+   ![alt_text](img/15.1.png)
+2. Jalankan command beikut yang berarti ingin membuat akun autentikasi baru dengan username **luffy**. Masukkan password baru dan confirm password tersebut dengan **onepiece**.
+   ```
+   htpasswd -c /etc/apache2/.htpasswd luffy
+   ```
+3. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+4. Lakukan testing `lynx general.mecha.franky.e14.com` dan `lynx wwww.general.mecha.franky.e14.com` pada Alabasta atau Loguetown. <br>
+   ![alt_text](img/15.4.png)
