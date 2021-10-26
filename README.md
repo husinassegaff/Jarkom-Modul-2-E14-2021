@@ -472,23 +472,23 @@ Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpa
    ServerAlias www.super.franky.e14.com
    DocumentRoot /var/www/super.franky.e14.com
    ```
-   ![alt_text](img/10.4.png)
-5. Aktifkan konfigurasi **super.franky.e14.com**.
+   ![alt_text](img/10.3.png)
+4. Aktifkan konfigurasi **super.franky.e14.com**.
    ```
    a2ensite super.franky.e14.com.conf
    ```
-6. Download asset yang telah disediakan soal. Kemudian extract **super.franky.zip**.
+5. Download asset yang telah disediakan soal. Kemudian extract **super.franky.zip**.
    ```
    wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip
    unzip super.franky.zip
    mv super.franky /var/www/super.franky.e14.com
    ```
-7. Lakukan restrart apache untuk menerapkan konfigurasi.
+6. Lakukan restrart apache untuk menerapkan konfigurasi.
    ```
    service apache2 restart
    ```
-8. Lakukan testing `lynx super.franky.e14.com` dan `lynx wwww.super.franky.e14.com` pada Alabasta atau Loguetown. <br>
-   ![alt_text](img/10.8.png)
+7. Lakukan testing `lynx super.franky.e14.com` dan `lynx wwww.super.franky.e14.com` pada Alabasta atau Loguetown. <br>
+   ![alt_text](img/10.7.png)
 
 ## Soal 11
 
@@ -547,7 +547,7 @@ Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host i
    service apache2 restart
    ```
 3. Lakukan testing `lynx super.franky.e14.com/js` dan `lynx super.wwww.franky.e14.com/js` pada Loguetown. <br>
-   ![alt_text](img/12.3.png)
+   ![alt_text](img/13.3.png)
 
 ## Soal 14
 
@@ -564,7 +564,8 @@ Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses 
    Listen 15000
    Listen 15500
    ```
-4. Edit file **/etc/apache2/sites-available/general.mecha.franky.e14.com.conf** dan tambahkan konfigurasi berikut.
+   ![alt_text](img/14.2.png)
+3. Edit file **/etc/apache2/sites-available/general.mecha.franky.e14.com.conf** dan tambahkan konfigurasi berikut.
    ```
    <VirtualHost *:15000 *:15500>
    ...
@@ -573,23 +574,22 @@ Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses 
    DocumentRoot /var/www/general.mecha.franky.e14.com
    ```
    ![alt_text](img/14.4.png)
-5. Aktifkan konfigurasi **general.mecha.franky.e14.com**.
+4. Aktifkan konfigurasi **general.mecha.franky.e14.com**.
    ```
    a2ensite general.mecha.franky.e14.com.conf
    ```
-6. Download asset yang telah disediakan soal. Kemudian extract **general.mecha.franky.zip**.
+5. Download asset yang telah disediakan soal. Kemudian extract **general.mecha.franky.zip**.
    ```
    wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/general.mecha.franky.zip
    unzip general.mecha.franky.zip
    mv general.mecha.franky /var/www/general.mecha.franky.e14.com/
    ```
-   ![alt_text](img/14.6.png)
-7. Lakukan restrart apache untuk menerapkan konfigurasi.
+6. Lakukan restrart apache untuk menerapkan konfigurasi.
    ```
    service apache2 restart
    ```
-8. Lakukan testing `lynx general.mecha.franky.e14.com:15000` dan `lynx general.mecha.franky.e14.com:15500` pada Alabasta atau Loguetown. <br>
-   ![alt_text](img/14.8.png)
+7. Lakukan testing `lynx general.mecha.franky.e14.com:15000` dan `lynx general.mecha.franky.e14.com:15500` pada Alabasta atau Loguetown. <br>
+   ![alt_text](img/14.7.png)
 
 ## Soal 15
 
@@ -616,4 +616,6 @@ Dengan autentikasi username luffy dan password onepiece dan file di /var/www/gen
    service apache2 restart
    ```
 4. Lakukan testing `lynx general.mecha.franky.e14.com` dan `lynx wwww.general.mecha.franky.e14.com` pada Alabasta atau Loguetown. <br>
-   ![alt_text](img/15.4.png)
+   ![alt_text](img/15.4.a.png)
+   ![alt_text](img/15.4.b.png)
+   ![alt_text](img/15.4.c.png)
