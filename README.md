@@ -401,7 +401,12 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
    cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.e14.com.conf
    ```
-4. Edit file **/etc/apache2/sites-available/franky.e14.com.conf**, lalu ganti **DocumentRoot** menjadi **/var/www/franky.e14.com**. <br>
+4. Edit file **/etc/apache2/sites-available/franky.e14.com.conf** dan tambahkan konfigurasi berikut.
+   ```
+   ServerName franky.e14.com
+   ServerAlias www.franky.e14.com
+   DocumentRoot /var/www/franky.e14.com
+   ```
    ![alt_text](img/8.4.png)
 5. Aktifkan konfigurasi **franky.e14.com**.
    ```
@@ -421,12 +426,8 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
    service apache2 restart
    ```
-8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta dan Loguetown. <br>
-   a. Alabasta <br>
+8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta atau Loguetown. <br>
    ![alt_text](img/8.8.a.png)
-
-   b. Loguetown <br>
-   ![alt_text](img/8.8.b.png)
 
 
 ## Soal 9
@@ -434,6 +435,18 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
 Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.
 
 **Pembahasan:**
+1. Edit file **/etc/apache2/sites-available/franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
+   ```
+   Alias "/home" "/var/www/franky.e14.com/index.php/home"
+   ```
+   ![alt_text](img/9.1.png)
+2. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+3. Lakukan testing `lynx franky.e14.com/home` dan `lynx wwww.franky.e14.com/home` pada Loguetown. <br>
+   ![alt_text](img/8.8.b.png)
+
 
 ## Soal 10
 
