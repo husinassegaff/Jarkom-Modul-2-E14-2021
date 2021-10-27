@@ -203,7 +203,7 @@ Buat juga reverse domain untuk domain utama
 
 **Pembahasan:**
 
-1. Membuka file **named.conf.local** dengan perintah
+1. Membuka file **named.conf.local** pada EniesLobby dengan perintah
    ```
    nano /etc/bind/named.conf.local
    ```
@@ -238,8 +238,8 @@ Buat juga reverse domain untuk domain utama
    ```
    - Kembalikan nameserver pada file **/etc/resolv.conf** ke nameserver EniesLobby
    ```
-   nameserver 192.168.122.1
-   #nameserver 10.36.2.2
+   #nameserver 192.168.122.1
+   nameserver 10.36.2.2
    ```
    - Jalankan perintah berikut untuk memastikan konfigurasi sudah benar atau belum. IP yang digunakan adalah IP EniesLobby
    ```
@@ -308,7 +308,7 @@ Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.frank
 
 **Pembahasan:**
 
-1. Pada EniesLobby, edit file **/etc/bind/kaizoku/franky.e14.com** dan ubah menjadi seperti di bawah ini sesuai dengan pembagian IP EniesLobby kelompok masing-masing.
+1. Pada EniesLobby, edit file **/etc/bind/kaizoku/franky.e14.com** dan ubah menjadi seperti di bawah ini,
    ```
    nano /etc/bind/kaizoku/franky.e14.com
    ```
@@ -365,12 +365,12 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
 
 **Pembahasan:**
 
-1. Edit file **/etc/bind/sunnygo/mecha.franky.e14.com**, lalu tambahkan subdomain untuk mecha.franky.e14.com yang mengarah ke IP Skypie.
+1. Edit file **/etc/bind/sunnygo/mecha.franky.e14.com** pada Water7, lalu tambahkan subdomain untuk mecha.franky.e14.com yang mengarah ke IP Skypie.
    ```
    nano /etc/bind/sunnygo/mecha.franky.e14.com
    ```
    ![water7_mecha.franky.e14.com](img/no7_water7_mecha.franky.e14.com.png)
-2. Restart service bind
+2. Restart service bind pada Water7 dan EniesLobby
    ```
    service bind9 restart
    ```
@@ -428,7 +428,6 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
 8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta atau Loguetown. <br>
    ![alt_text](img/8.8.png)
 
-
 ## Soal 9
 
 Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.
@@ -446,7 +445,6 @@ Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home d
    ```
 3. Lakukan testing `lynx franky.e14.com/home` dan `lynx wwww.franky.e14.com/home` pada Loguetown. <br>
    ![alt_text](img/9.3.png)
-
 
 ## Soal 10
 
