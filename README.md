@@ -617,3 +617,36 @@ Dengan autentikasi username luffy dan password onepiece dan file di /var/www/gen
    ![alt_text](img/15.4.a.png)
    ![alt_text](img/15.4.b.png)
    ![alt_text](img/15.4.c.png)
+
+## Soal 16
+
+Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com.
+**Pembahasan:**
+
+## Soal 17
+
+Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
+
+**Pembahasan:**
+
+1. Edit file **/etc/apache2/sites-available/super.franky.e14.com.conf**, lalu tambahkan konfigurasi berikut.
+   ```
+   <Directory /var/www/super.franky.e14.com>
+      Options +Indexes +FollowSymLinks -MultiViews
+      AllowOverride All
+   </Directory>
+   ```
+   ![alt_text](img/17.1.png)
+2. Jalan kan `a2enmod rewrite` untuk mengaktifkan mod rewrite. Kemudian buat file **/var/www/seper.franky.e14.com/.htaccess" dengan menambahkan config berikut.
+   ```
+   RewriteEngine On
+   RewriteCond %{REQUEST_URI} ^/public/images/(.*)franky(.*)
+   RewriteCond %{REQUEST_URI} !/public/images/franky.png
+   RewriteRule /.* http://super.franky.e14.com/public/images/franky.png [L]
+   ```
+3. Lakukan restrart apache untuk menerapkan konfigurasi.
+   ```
+   service apache2 restart
+   ```
+4. Lakukan testing `lynx super.franky.e14.com/public/images/punkyfranky.png` pada Loguetown. <br>
+   ![alt_text](img/17.4.png)
