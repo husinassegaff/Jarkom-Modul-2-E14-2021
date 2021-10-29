@@ -655,7 +655,11 @@ Lalu ```a2enmod rewrite``` dieksekusi agar module rewrite kita dapat ter-enable.
 
 3. Lalu jalankan script dengan mengetik pada terminal ```bash settings/no16/no16.sh```.
 ![alt_text](img/16.3.png)
-5. Kemudian cek apakah IP Skypie sudah di redirect ke ```franky.e14.com```.
+4. Kemudian cek apakah IP Skypie sudah di redirect ke ```franky.e14.com``` dengan mengetik perintah ```lynx 10.36.2.4``` di Loguetown atau Alabasta.
+(Sebelum di redirect)
+![alt_text](img/16.4.a.png)
+(Setelah di redirect)
+![alt_text](img/16.4.b.png)
 
 
 ## Soal 17
