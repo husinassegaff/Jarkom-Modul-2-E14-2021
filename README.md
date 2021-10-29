@@ -128,7 +128,7 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 
 ## Soal 2
 
-Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku
+Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.e14.com dengan alias www.franky.e14.com pada folder kaizoku
 
 **Pembahasan:**
 
@@ -181,7 +181,7 @@ Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Ka
 
 ## Soal 3
 
-Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
+Setelah itu buat subdomain super.franky.e14.com dengan alias www.super.franky.e14.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
 
 **Pembahasan:**
 
@@ -304,7 +304,7 @@ Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Wat
 
 ## Soal 6
 
-Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
+Setelah itu terdapat subdomain mecha.franky.e14.com dengan alias www.mecha.franky.e14.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
 
 **Pembahasan:**
 
@@ -361,7 +361,7 @@ service bind9 restart
 
 ## Soal 7
 
-Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
+Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.e14.com dengan alias www.general.mecha.franky.e14.com yang mengarah ke Skypie
 
 **Pembahasan:**
 
@@ -383,7 +383,7 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
 
 ## Soal 8
 
-Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
+Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.e14.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.e14.com.
 
 **Pembahasan:**
 
@@ -430,7 +430,7 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
 
 ## Soal 9
 
-Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.
+Setelah itu, Luffy juga membutuhkan agar url www.franky.e14.com/index.php/home dapat menjadi menjadi www.franky.e14.com/home.
 
 **Pembahasan:**
 
@@ -448,7 +448,7 @@ Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home d
 
 ## Soal 10
 
-Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com.
+Setelah itu, pada subdomain www.super.franky.e14.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.e14.com.
 
 **Pembahasan:**
 
@@ -528,7 +528,7 @@ Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error un
 
 ## Soal 13
 
-Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js.
+Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.e14.com/public/js menjadi www.super.franky.e14.com/js.
 
 **Pembahasan:**
 
@@ -549,7 +549,7 @@ Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host i
 
 ## Soal 14
 
-Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500.
+Dan Luffy meminta untuk web www.general.mecha.franky.e14.com hanya bisa diakses dengan port 15000 dan port 15500.
 
 **Pembahasan:**
 
@@ -591,7 +591,7 @@ Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses 
 
 ## Soal 15
 
-Dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy.
+Dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.e14.
 
 **Pembahasan:**
 
