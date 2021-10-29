@@ -637,16 +637,21 @@ Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+![alt_text](img/16.1.png)
 
-2. Kemudian buat file script bash ```no16.sh``` pada ```/root/settings/no16/```, dengan perintah sebagai berikut.
+2. Kemudian buat file script bash ```no16.sh``` pada ```/root/settings/no16/```, dengan perintah sebagai berikut. 
 ```
 cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 a2enmod rewrite
 service apache2 restart
 ```
+![alt_text](img/16.2.png)
 
-3. Lalu jalankan script dengan mengetik pada terminal ```bash settings/no16/no16.sh````.
+Perintah ```cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf``` digunakan untuk menyalin konfigurasi yang disiapkan ke konfigurasi default.
+Lalu ```a2enmod rewrite``` dieksekusi agar module rewrite kita dapat ter-enable. Terakhir, mulai lagi server apache dengan perintah ```service apache2 restart```.
+
+3. Lalu jalankan script dengan mengetik pada terminal ```bash settings/no16/no16.sh```.
 4. Kemudian cek apakah IP Skypie sudah di redirect ke ```franky.e14.com```.
 
 
