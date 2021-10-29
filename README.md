@@ -425,7 +425,7 @@ Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pert
    ```
    service apache2 restart
    ```
-8. Lakukan testing `lynx franky.e14.com` dan `lynx wwww.franky.e14.com` pada Alabasta atau Loguetown. <br>
+8. Lakukan testing `lynx franky.e14.com` dan `lynx www.franky.e14.com` pada Alabasta atau Loguetown. <br>
    ![alt_text](img/8.8.png)
 
 ## Soal 9
@@ -443,7 +443,7 @@ Setelah itu, Luffy juga membutuhkan agar url www.franky.e14.com/index.php/home d
    ```
    service apache2 restart
    ```
-3. Lakukan testing `lynx franky.e14.com/home` dan `lynx wwww.franky.e14.com/home` pada Loguetown. <br>
+3. Lakukan testing `lynx franky.e14.com/home` dan `lynx www.franky.e14.com/home` pada Loguetown. <br>
    ![alt_text](img/9.3.png)
 
 ## Soal 10
@@ -485,7 +485,7 @@ Setelah itu, pada subdomain www.super.franky.e14.com, Luffy membutuhkan penyimpa
    ```
    service apache2 restart
    ```
-7. Lakukan testing `lynx super.franky.e14.com` dan `lynx wwww.super.franky.e14.com` pada Alabasta atau Loguetown. <br>
+7. Lakukan testing `lynx super.franky.e14.com` dan `lynx www.super.franky.e14.com` pada Alabasta atau Loguetown. <br>
    ![alt_text](img/10.7.png)
 
 ## Soal 11
@@ -505,7 +505,7 @@ Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory li
    ```
    service apache2 restart
    ```
-3. Lakukan testing `lynx super.franky.e14.com/public` dan `lynx super.wwww.franky.e14.com/public` pada Loguetown. <br>
+3. Lakukan testing `lynx super.franky.e14.com/public` dan `lynx www.super.franky.e14.com/public` pada Loguetown. <br>
    ![alt_text](img/11.3.png)
 
 ## Soal 12
@@ -523,7 +523,7 @@ Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error un
    ```
    service apache2 restart
    ```
-3. Lakukan testing `lynx super.franky.e14.com/404` dan `lynx super.wwww.franky.e14.com/404` pada Loguetown. <br>
+3. Lakukan testing `lynx super.franky.e14.com/404` dan `lynx www.super.franky.e14.com/404` pada Loguetown. <br>
    ![alt_text](img/12.3.png)
 
 ## Soal 13
@@ -544,7 +544,7 @@ Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host i
    ```
    service apache2 restart
    ```
-3. Lakukan testing `lynx super.franky.e14.com/js` dan `lynx super.wwww.franky.e14.com/js` pada Loguetown. <br>
+3. Lakukan testing `lynx super.franky.e14.com/js` dan `lynx www.super.franky.e14.com/js` pada Loguetown. <br>
    ![alt_text](img/13.3.png)
 
 ## Soal 14
