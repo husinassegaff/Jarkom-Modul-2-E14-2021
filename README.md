@@ -641,6 +641,8 @@ Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky
 
 2. Kemudian buat file script bash ```no16.sh``` pada ```/root/settings/no16/```, dengan perintah sebagai berikut. 
 ```
+#!/bin/bash
+
 cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 a2enmod rewrite
@@ -652,7 +654,8 @@ Perintah ```cp /root/settings/no16/000-default.conf /etc/apache2/sites-available
 Lalu ```a2enmod rewrite``` dieksekusi agar module rewrite kita dapat ter-enable. Terakhir, mulai lagi server apache dengan perintah ```service apache2 restart```.
 
 3. Lalu jalankan script dengan mengetik pada terminal ```bash settings/no16/no16.sh```.
-4. Kemudian cek apakah IP Skypie sudah di redirect ke ```franky.e14.com```.
+![alt_text](img/16.3.png)
+5. Kemudian cek apakah IP Skypie sudah di redirect ke ```franky.e14.com```.
 
 
 ## Soal 17
