@@ -623,6 +623,33 @@ Dengan autentikasi username luffy dan password onepiece dan file di /var/www/gen
 Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com.
 **Pembahasan:**
 
+1. Tambahkan file ```000-default.conf``` pada ```/root/settings/no16/```, kemudian tuliskan konfigurasi berikut.
+```
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        RewriteEngine On
+        RewriteCond %{HTTP_HOST} !^franky.e14.com$
+        RewriteRule /.* http://franky.e14.com/ [R]
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+2. Kemudian buat file script bash ```no16.sh``` pada ```/root/settings/no16/```, dengan perintah sebagai berikut.
+```
+cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+a2enmod rewrite
+service apache2 restart
+```
+
+3. Lalu jalankan script dengan mengetik pada terminal ```bash settings/no16/no16.sh````.
+4. Kemudian cek apakah IP Skypie sudah di redirect ke ```franky.e14.com```.
+
+
 ## Soal 17
 
 Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
