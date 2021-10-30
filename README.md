@@ -623,7 +623,8 @@ Dengan autentikasi username luffy dan password onepiece dan file di /var/www/gen
 Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com.
 **Pembahasan:**
 
-1. Tambahkan file ```000-default.conf``` pada ```/root/settings/no16/```, kemudian tuliskan konfigurasi berikut.
+1. Tambahkan file `000-default.conf` pada `/root/settings/no16/`, kemudian tuliskan konfigurasi berikut.
+
 ```
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
@@ -637,9 +638,11 @@ Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+
 ![alt_text](img/16.1.png)
 
-2. Kemudian buat file script bash ```no16.sh``` pada ```/root/settings/no16/```, dengan perintah sebagai berikut. 
+2. Kemudian buat file script bash `no16.sh` pada `/root/settings/no16/`, dengan perintah sebagai berikut.
+
 ```
 #!/bin/bash
 
@@ -648,19 +651,19 @@ cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default
 a2enmod rewrite
 service apache2 restart
 ```
+
 ![alt_text](img/16.2.png)
 
-Perintah ```cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf``` digunakan untuk menyalin konfigurasi yang disiapkan ke konfigurasi default.
-Lalu ```a2enmod rewrite``` dieksekusi agar module rewrite kita dapat ter-enable. Terakhir, mulai lagi server apache dengan perintah ```service apache2 restart```.
+Perintah `cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf` digunakan untuk menyalin konfigurasi yang disiapkan ke konfigurasi default.
+Lalu `a2enmod rewrite` dieksekusi agar module rewrite kita dapat ter-enable. Terakhir, mulai lagi server apache dengan perintah `service apache2 restart`.
 
-3. Lalu jalankan script dengan mengetik pada terminal ```bash settings/no16/no16.sh```.
-![alt_text](img/16.3.png)
-4. Kemudian cek apakah IP Skypie sudah di redirect ke ```franky.e14.com``` dengan mengetik perintah ```lynx 10.36.2.4``` di Loguetown atau Alabasta.
-(Sebelum di redirect)
-![alt_text](img/16.4.a.png)
-(Setelah di redirect)
-![alt_text](img/16.4.b.png)
-
+3. Lalu jalankan script dengan mengetik pada terminal `bash settings/no16/no16.sh`.
+   ![alt_text](img/16.3.png)
+4. Kemudian cek apakah IP Skypie sudah di redirect ke `franky.e14.com` dengan mengetik perintah `lynx 10.36.2.4` di Loguetown atau Alabasta.
+   (Sebelum di redirect)
+   ![alt_text](img/16.4.a.png)
+   (Setelah di redirect)
+   ![alt_text](img/16.4.b.png)
 
 ## Soal 17
 
@@ -676,7 +679,7 @@ Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melal
    </Directory>
    ```
    ![alt_text](img/17.1.png)
-2. Jalan kan `a2enmod rewrite` untuk mengaktifkan mod rewrite. Kemudian buat file **/var/www/seper.franky.e14.com/.htaccess" dengan menambahkan config berikut.
+2. Jalan kan `a2enmod rewrite` untuk mengaktifkan mod rewrite. Kemudian buat file \*\*/var/www/seper.franky.e14.com/.htaccess" dengan menambahkan config berikut.
    ```
    RewriteEngine On
    RewriteCond %{REQUEST_URI} ^/public/images/(.*)franky(.*)
@@ -689,3 +692,7 @@ Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melal
    ```
 4. Lakukan testing `lynx super.franky.e14.com/public/images/punkyfranky.png` pada Loguetown. <br>
    ![alt_text](img/17.4.png)
+
+## Kendala
+
+Sejauh ini dari kelompok kami tidak ada kendala, hanya saja masih perlu memahami mengenai materi web server
