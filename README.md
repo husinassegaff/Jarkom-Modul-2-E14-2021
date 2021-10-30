@@ -300,7 +300,11 @@ Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Wat
    nameserver 10.36.2.2
    nameserver 10.36.2.3
    ```
-   - Lakukan `ping franky.e14.com` pada Alabasta dan Loguetown
+   - Lakukan `ping franky.e14.com` pada Alabasta dan Loguetown <br/>
+     a. Alabasta
+     ![no5_test_ping_alabasta](img/no5_test_ping_alabasta.png)
+     b. Loguetown
+     ![no5_test_ping_loguetown](img/no5_test_ping_loguetown.png)
 
 ## Soal 6
 
@@ -571,7 +575,7 @@ Dan Luffy meminta untuk web www.general.mecha.franky.e14.com hanya bisa diakses 
    ServerAlias www.general.mecha.franky.e14.com
    DocumentRoot /var/www/general.mecha.franky.e14.com
    ```
-   ![alt_text](img/14.4.png)
+   ![alt_text](img/14.3.png)
 4. Aktifkan konfigurasi **general.mecha.franky.e14.com**.
    ```
    a2ensite general.mecha.franky.e14.com.conf
@@ -625,37 +629,37 @@ Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky
 
 1. Tambahkan file `000-default.conf` pada `/root/settings/no16/`, kemudian tuliskan konfigurasi berikut.
 
-```
-<VirtualHost *:80>
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html
+   ```
+   <VirtualHost *:80>
+         ServerAdmin webmaster@localhost
+         DocumentRoot /var/www/html
 
-        RewriteEngine On
-        RewriteCond %{HTTP_HOST} !^franky.e14.com$
-        RewriteRule /.* http://franky.e14.com/ [R]
+         RewriteEngine On
+         RewriteCond %{HTTP_HOST} !^franky.e14.com$
+         RewriteRule /.* http://franky.e14.com/ [R]
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-```
+         ErrorLog ${APACHE_LOG_DIR}/error.log
+         CustomLog ${APACHE_LOG_DIR}/access.log combined
+   </VirtualHost>
+   ```
 
-![alt_text](img/16.1.png)
+   ![alt_text](img/16.1.png)
 
 2. Kemudian buat file script bash `no16.sh` pada `/root/settings/no16/`, dengan perintah sebagai berikut.
 
-```
-#!/bin/bash
+   ```
+   #!/bin/bash
 
-cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf
+   cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-a2enmod rewrite
-service apache2 restart
-```
+   a2enmod rewrite
+   service apache2 restart
+   ```
 
-![alt_text](img/16.2.png)
+   ![alt_text](img/16.2.png)
 
-Perintah `cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf` digunakan untuk menyalin konfigurasi yang disiapkan ke konfigurasi default.
-Lalu `a2enmod rewrite` dieksekusi agar module rewrite kita dapat ter-enable. Terakhir, mulai lagi server apache dengan perintah `service apache2 restart`.
+   Perintah `cp /root/settings/no16/000-default.conf /etc/apache2/sites-available/000-default.conf` digunakan untuk menyalin konfigurasi yang disiapkan ke konfigurasi default.
+   Lalu `a2enmod rewrite` dieksekusi agar module rewrite kita dapat ter-enable. Terakhir, mulai lagi server apache dengan perintah `service apache2 restart`.
 
 3. Lalu jalankan script dengan mengetik pada terminal `bash settings/no16/no16.sh`.
    ![alt_text](img/16.3.png)
